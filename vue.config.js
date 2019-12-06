@@ -31,7 +31,7 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     port: port,
-    open: true,
+    // open: true,
     overlay: {
       warnings: false,
       errors: true
@@ -39,6 +39,10 @@ module.exports = {
     proxy: {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
+      '/manager':{
+        target: `http://127.0.0.1:8088`,
+        changeOrigin: true,
+      },
       [process.env.VUE_APP_BASE_API]: {
         target: `http://127.0.0.1:${port}/mock`,
         changeOrigin: true,
